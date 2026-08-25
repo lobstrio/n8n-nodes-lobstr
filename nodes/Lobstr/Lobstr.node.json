@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-lobstr.lobstr",
+	"node": "@lobstrio/n8n-nodes-lobstr.lobstr",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Data & Storage", "Development"],

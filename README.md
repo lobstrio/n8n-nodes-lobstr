@@ -1,4 +1,4 @@
-# n8n-nodes-lobstr
+# @lobstrio/n8n-nodes-lobstr
 
 This is an n8n community node for [lobstr.io](https://www.lobstr.io) — a cloud web scraping platform. It lets you run scrapers (squids), manage tasks and runs, fetch structured results, and trigger workflows when runs finish.
 
@@ -16,7 +16,7 @@ This is an n8n community node for [lobstr.io](https://www.lobstr.io) — a cloud
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
-For self-hosted n8n: **Settings → Community Nodes → Install**, then enter `n8n-nodes-lobstr`.
+For self-hosted n8n: **Settings → Community Nodes → Install**, then enter `@lobstrio/n8n-nodes-lobstr`.
 
 ## Credentials
 
