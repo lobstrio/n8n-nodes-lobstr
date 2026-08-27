@@ -6,6 +6,7 @@ import type {
 	IWebhookFunctions,
 	IWebhookResponseData,
 } from 'n8n-workflow';
+import { NodeConnectionTypes } from 'n8n-workflow';
 
 import { lobstrApiRequest, searchSquids } from '../Lobstr/GenericFunctions';
 
@@ -15,15 +16,16 @@ export class LobstrTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Lobstr Trigger',
 		name: 'lobstrTrigger',
-		icon: 'file:lobstr.svg',
+		icon: { light: 'file:lobstr.svg', dark: 'file:lobstr.dark.svg' },
 		group: ['trigger'],
 		version: 1,
+		subtitle: '={{$parameter["events"].join(", ")}}',
 		description: 'Starts the workflow when a lobstr.io squid run event occurs',
 		defaults: {
 			name: 'Lobstr Trigger',
 		},
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'lobstrApi',
@@ -199,7 +201,11 @@ export class LobstrTrigger implements INodeType {
 						},
 						{ squid: squidId },
 					);
-				} catch {
+				} catch (error) {
+					// Returning false tells n8n the webhook may need manual cleanup on the squid
+					this.logger.error(
+						`Lobstr Trigger: failed to deactivate webhook delivery on squid ${squidId}: ${(error as Error).message}`,
+					);
 					return false;
 				}
 

@@ -4,8 +4,9 @@ import type {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	JsonObject,
 } from 'n8n-workflow';
-import { jsonParse, NodeOperationError, sleep } from 'n8n-workflow';
+import { jsonParse, NodeApiError, NodeConnectionTypes, NodeOperationError, sleep } from 'n8n-workflow';
 
 import {
 	lobstrApiRequest,
@@ -18,7 +19,7 @@ export class Lobstr implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Lobstr',
 		name: 'lobstr',
-		icon: 'file:lobstr.svg',
+		icon: { light: 'file:lobstr.svg', dark: 'file:lobstr.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
@@ -27,8 +28,8 @@ export class Lobstr implements INodeType {
 			name: 'Lobstr',
 		},
 		usableAsTool: true,
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'lobstrApi',
@@ -1054,7 +1055,11 @@ export class Lobstr implements INodeType {
 					});
 					continue;
 				}
-				throw error;
+				const nodeError =
+					error instanceof NodeApiError || error instanceof NodeOperationError
+						? error
+						: new NodeApiError(this.getNode(), error as JsonObject);
+				throw nodeError;
 			}
 		}
 
