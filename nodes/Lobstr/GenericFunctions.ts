@@ -55,11 +55,21 @@ export async function lobstrApiRequest(
 		}
 		const apiError = (responseBody as IDataObject | undefined)?.errors as IDataObject | undefined;
 		if (apiError?.message && error instanceof Error) {
-			error.message = String(apiError.message);
-			if (apiError.type) {
-				(error as unknown as IDataObject).description = `lobstr.io error type: ${apiError.type as string}`;
+			const message = String(apiError.message);
+			const description = apiError.type
+				? `lobstr.io error type: ${apiError.type as string}`
+				: undefined;
+			// Mutate in place: when `error` is already a NodeApiError, the constructor below
+			// returns it unchanged and discards the overrides. The overrides only take effect
+			// on the fallback path where the error actually gets wrapped.
+			error.message = message;
+			if (description) {
+				(error as unknown as IDataObject).description = description;
 			}
-			throw error;
+			throw new NodeApiError(this.getNode(), error as unknown as JsonObject, {
+				message,
+				description,
+			});
 		}
 		throw new NodeApiError(this.getNode(), error as JsonObject);
 	}

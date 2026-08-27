@@ -10,7 +10,7 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 
 	parserOptions: {
-		project: ['./tsconfig.json'],
+		project: ['./tsconfig.eslint.json'],
 		sourceType: 'module',
 		extraFileExtensions: ['.json'],
 	},
@@ -40,7 +40,12 @@ module.exports = {
 			files: ['./nodes/**/*.ts'],
 			plugins: ['eslint-plugin-n8n-nodes-base'],
 			extends: ['plugin:n8n-nodes-base/nodes'],
-			rules: {},
+			rules: {
+				// These autofix to 'main' string literals, but n8n's verification scanner
+				// (@n8n/eslint-plugin-community-nodes) requires NodeConnectionTypes.Main
+				'n8n-nodes-base/node-class-description-inputs-wrong-regular-node': 'off',
+				'n8n-nodes-base/node-class-description-outputs-wrong': 'off',
+			},
 		},
 	],
 };

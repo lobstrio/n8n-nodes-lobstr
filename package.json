@@ -1,6 +1,6 @@
 {
 	"name": "@lobstrio/n8n-nodes-lobstr",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "n8n community node for lobstr.io — run cloud scrapers (squids), manage tasks and runs, fetch structured results, and trigger workflows on run events",
 	"keywords": [
 		"n8n-community-node-package",

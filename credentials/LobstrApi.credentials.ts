@@ -2,6 +2,7 @@ import type {
 	IAuthenticateGeneric,
 	ICredentialTestRequest,
 	ICredentialType,
+	Icon,
 	INodeProperties,
 } from 'n8n-workflow';
 
@@ -9,6 +10,8 @@ export class LobstrApi implements ICredentialType {
 	name = 'lobstrApi';
 
 	displayName = 'Lobstr API';
+
+	icon: Icon = { light: 'file:lobstr.svg', dark: 'file:lobstr.dark.svg' };
 
 	documentationUrl = 'https://docs.lobstr.io/docs/authentication';
 
