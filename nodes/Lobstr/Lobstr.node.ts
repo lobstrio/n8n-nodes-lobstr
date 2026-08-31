@@ -17,7 +17,7 @@ import {
 
 export class Lobstr implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Lobstr',
+		displayName: 'lobstr.io',
 		name: 'lobstr',
 		icon: { light: 'file:lobstr.svg', dark: 'file:lobstr.dark.svg' },
 		group: ['transform'],
@@ -25,7 +25,7 @@ export class Lobstr implements INodeType {
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Run lobstr.io cloud scrapers and collect structured data',
 		defaults: {
-			name: 'Lobstr',
+			name: 'lobstr.io',
 		},
 		usableAsTool: true,
 		inputs: [NodeConnectionTypes.Main],
@@ -122,10 +122,10 @@ export class Lobstr implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get Many',
+						name: 'Get Results',
 						value: 'getMany',
 						description: 'Get scraped results of a squid or a run',
-						action: 'Get many results',
+						action: 'Get results',
 					},
 				],
 				default: 'getMany',

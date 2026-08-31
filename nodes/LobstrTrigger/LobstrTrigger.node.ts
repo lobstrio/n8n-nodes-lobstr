@@ -14,7 +14,7 @@ const ALL_EVENTS = ['run.done', 'run.error', 'run.paused', 'run.running'];
 
 export class LobstrTrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Lobstr Trigger',
+		displayName: 'lobstr.io Trigger',
 		name: 'lobstrTrigger',
 		icon: { light: 'file:lobstr.svg', dark: 'file:lobstr.dark.svg' },
 		group: ['trigger'],
@@ -22,7 +22,7 @@ export class LobstrTrigger implements INodeType {
 		subtitle: '={{$parameter["events"].join(", ")}}',
 		description: 'Starts the workflow when a lobstr.io squid run event occurs',
 		defaults: {
-			name: 'Lobstr Trigger',
+			name: 'lobstr.io Trigger',
 		},
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
@@ -204,7 +204,7 @@ export class LobstrTrigger implements INodeType {
 				} catch (error) {
 					// Returning false tells n8n the webhook may need manual cleanup on the squid
 					this.logger.error(
-						`Lobstr Trigger: failed to deactivate webhook delivery on squid ${squidId}: ${(error as Error).message}`,
+						`lobstr.io Trigger: failed to deactivate webhook delivery on squid ${squidId}: ${(error as Error).message}`,
 					);
 					return false;
 				}
