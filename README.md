@@ -21,13 +21,13 @@ For self-hosted n8n: **Settings → Community Nodes → Install**, then enter `@
 ## Credentials
 
 1. Get your API key from the [API menu](https://app.lobstr.io/dashboard/api) in your lobstr.io dashboard.
-2. In n8n, create new **Lobstr API** credentials and paste the key.
+2. In n8n, create new **lobstr.io API** credentials and paste the key.
 
 The credential is verified against the lobstr.io API when you save it.
 
 ## Operations
 
-### Lobstr node
+### lobstr.io node
 
 | Resource | Operations |
 | --- | --- |
@@ -35,14 +35,14 @@ The credential is verified against the lobstr.io API when you save it.
 | **Squid** | Create, Delete, Empty, Get, Get Many, Update |
 | **Task** | Create (add tasks), Delete, Get Many |
 | **Run** | Abort, Get, Get Many, Start, Start and Get Results |
-| **Result** | Get Many (by squid or by run) |
+| **Result** | Get Results (by squid or by run) |
 | **User** | Get Balance, Get Profile |
 
-**Start and Get Results** starts a run, polls until it finishes, and outputs the scraped results as items — the simplest way to scrape synchronously inside a workflow. For long runs, prefer **Start** + the **Lobstr Trigger** node.
+**Start and Get Results** starts a run, polls until it finishes, and outputs the scraped results as items — the simplest way to scrape synchronously inside a workflow. For long runs, prefer **Start** + the **lobstr.io Trigger** node.
 
 ## Trigger
 
-The **Lobstr Trigger** node starts a workflow when a squid run event occurs:
+The **lobstr.io Trigger** node starts a workflow when a squid run event occurs:
 
 - `run.done` — run completed successfully
 - `run.error` — run crashed with an error
@@ -53,14 +53,14 @@ It uses lobstr.io [webhook delivery](https://docs.lobstr.io/docs/configure-webho
 
 ## Example: scrape and get results
 
-1. **Lobstr → Squid → Create** — pick a crawler (e.g. Google Maps Search Export) and create a squid.
-2. **Lobstr → Task → Create** — add tasks (URLs or search parameters, depending on the crawler).
-3. **Lobstr → Run → Start and Get Results** — run the squid and get the scraped data as items.
+1. **lobstr.io → Squid → Create** — pick a crawler (e.g. Google Maps Search Export) and create a squid.
+2. **lobstr.io → Task → Create** — add tasks (URLs or search parameters, depending on the crawler).
+3. **lobstr.io → Run → Start and Get Results** — run the squid and get the scraped data as items.
 
 Or, event-driven:
 
-1. **Lobstr Trigger** — select your squid and the `run.done` event.
-2. **Lobstr → Result → Get Many** — filter by run, using `{{ $json.id }}` from the trigger event.
+1. **lobstr.io Trigger** — select your squid and the `run.done` event.
+2. **lobstr.io → Result → Get Results** — filter by run, using `{{ $json.id }}` from the trigger event.
 
 ## Compatibility
 

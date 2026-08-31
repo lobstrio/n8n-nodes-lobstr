@@ -9,7 +9,7 @@ import type {
 export class LobstrApi implements ICredentialType {
 	name = 'lobstrApi';
 
-	displayName = 'Lobstr API';
+	displayName = 'lobstr.io API';
 
 	icon: Icon = { light: 'file:lobstr.svg', dark: 'file:lobstr.dark.svg' };
 
