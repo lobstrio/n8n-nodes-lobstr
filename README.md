@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Archived on 26 November 2026.** This node runs API v1 squids and still installs from npm. For new workflows, call the [API v2](https://docs.lobstr.io) from n8n's HTTP Request node: one call per operation, JSON back in seconds.
+
 # @lobstrio/n8n-nodes-lobstr
 
 This is an n8n community node for [lobstr.io](https://www.lobstr.io) — a cloud web scraping platform. It lets you run scrapers (squids), manage tasks and runs, fetch structured results, and trigger workflows when runs finish.
